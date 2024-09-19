@@ -1,8 +1,12 @@
-<x-guest-layout>
+<x-landing-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <x-slot name="heading">
+        {{ _('Log in to your account') }}
+    </x-slot>
+
+    <form method="POST" action="{{ route('login') }}" class="w-full max-w-2xl p-5 bg-white dark:bg-violet-800 rounded-md shadow-md">
         @csrf
 
         <!-- Email Address -->
@@ -34,7 +38,7 @@
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                <a class="underline text-lg text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -44,4 +48,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-landing-layout>

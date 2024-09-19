@@ -1,14 +1,15 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+<x-landing-layout>
+    <x-slot name="heading">
+        {{ _('Reset Password') }}
+    </x-slot>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
+    <form method="POST" action="{{ route('password.email') }}" class="w-full max-w-2xl p-5 bg-white dark:bg-violet-800 rounded-md shadow-md">
         @csrf
-
+        <div class="mb-4 text-gray-600 dark:text-white text-lg">
+            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        </div>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -22,4 +23,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-landing-layout>

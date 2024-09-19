@@ -1,7 +1,10 @@
-<x-guest-layout>
+<x-landing-layout>
+    <x-slot name="heading">
+        {{ __('Confirm Password') }}
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>
+    </x-slot>
 
     <form method="POST" action="{{ route('password.confirm') }}">
         @csrf
@@ -24,4 +27,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-landing-layout>
