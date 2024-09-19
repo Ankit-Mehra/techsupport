@@ -1,11 +1,14 @@
 <x-landing-layout>
     <x-slot name="heading">
-        {{ _('Register for using ticketing system')}}
+        {{ _('Welcome!! Join us for a seamless support experience') }}
     </x-slot>
-    <form method="POST" action="{{ route('register') }}" class="w-full max-w-2xl p-5 bg-white dark:bg-violet-800 rounded-md shadow-md">
+    <form method="POST" action="{{ route('register') }}" class="w-full max-w-2xl p-5 bg-white dark:bg-violet-700 rounded-md shadow-md mt-4">
         @csrf
         <!-- Name -->
-        <div>
+        <div class="mb-4 text-gray-600 dark:text-white text-xl text-center">
+            {{ __('Let\'s get you started by creating your account. ') }}
+        </div>
+        <div class="mt-4">
             <x-input-label for="name" :value="__('Username')" class="text-lg font-semibold" />
             <x-text-input id="name" class="block mt-1 w-full text-lg" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="johndoe" />
             <x-input-error :messages="$errors->get('name')" class="mt-2 text-sm text-red-600" />

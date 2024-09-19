@@ -28,7 +28,7 @@
             <header class="flex items-center justify-end p-6">
                 <img src="{{ Vite::asset('resources/images/logo.svg') }}" class="h-20 w-auto" alt="Logo">
             </header>
-            <h1 class="text-4xl font-bold text-center">{{ $heading }}</h1>
+            <h1 class="text-3xl font-bold text-center">{{ $heading }}</h1>
             <!-- Registration Form -->
             <main class="flex-grow flex items-center justify-center">
                 {{ $slot }}
@@ -37,6 +37,8 @@
             <!-- Footer -->
             <footer class="p-6 text-base text-black dark:text-white text-center">
                 All rights reserved &copy; {{ date('Y') }}
+                <a href="#" class="ml-3 text-white hover:underline">Privacy Policy/Terms of Service</a>
+
             </footer>
         </div>
     </div>
