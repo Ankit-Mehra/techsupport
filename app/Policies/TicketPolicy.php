@@ -4,24 +4,18 @@ namespace App\Policies;
 
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TicketPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
+    use HandlesAuthorization;
 
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Ticket $ticket): bool
     {
-        //
+        return $user->hasRole('admin') || $user->id === $ticket->user_id;
     }
 
     /**
@@ -29,7 +23,7 @@ class TicketPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->hasRole(['admin', 'customer', 'agent']);
     }
 
     /**
@@ -37,7 +31,7 @@ class TicketPolicy
      */
     public function update(User $user, Ticket $ticket): bool
     {
-        //
+        return $user->hasRole(['admin','agent']) || $user->id === $ticket->user_id;
     }
 
     /**
@@ -45,22 +39,25 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket): bool
     {
-        //
+        return $user->hasRole('admin');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Ticket $ticket): bool
+    public function updateStatus(User $user)
     {
-        //
+        // Define logic for who can update the status
+        return $user->hasRole(['admin','agent']) || $user->hasRole('agent');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Ticket $ticket): bool
+    public function updatePriority(User $user)
     {
-        //
+        // Define logic for who can update the priority
+        return $user->hasRole('admin');
     }
+
+    public function assignAgent(User $user)
+    {
+        // Define logic for who can assign an agent
+        return $user->hasRole('admin');
+    }
+
 }
